@@ -8,6 +8,7 @@ public class BJ11654 {
 		Scanner reader = new Scanner(System.in);
 		
 		System.out.println(getAsciiCode(reader.next()));
+		reader.close();
 
 	}
 	
