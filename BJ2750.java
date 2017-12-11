@@ -17,38 +17,40 @@ public class BJ2750 {
 		quickSortAry(inputAry, 0, inputAry.size() - 1);
 		
 		for(int value : inputAry) {
-			System.out.print(value);
+			System.out.println(value);
 		}
 		
 	}
 	
 	static void quickSortAry(ArrayList<Integer> ary, int leftIdx, int rightIdx) {
-		int left = leftIdx, right = rightIdx;
-		int pivotIdx = (left + right)/2;
+		if(leftIdx < rightIdx) {
+			int pivotIdx = quickSortDivide(ary, leftIdx, rightIdx);
+			
+			if(leftIdx < pivotIdx) quickSortAry(ary, leftIdx, pivotIdx - 1);
+			if(pivotIdx + 1 < rightIdx) quickSortAry(ary, pivotIdx + 1, rightIdx);
+		}
+	}
+	
+	static int quickSortDivide(ArrayList<Integer> ary, int left, int right) {
+		int idxL = left + 1;
+		int pivotIdx = left;
+		int pivot = ary.get(pivotIdx);
+		int tmp;
 		
-		while(left < right) {
-			int pivot = ary.get(pivotIdx);
-			if(ary.get(left) < pivot) {
-				left++;
-			}
-			else {
-				while(ary.get(right) > pivot) {
-					right--;
-				}
+		while(idxL <= right) {
+			if(ary.get(idxL) < pivot) {
+				pivotIdx++;
 				
-				int tmp = ary.get(left);
-				ary.set(left, ary.get(right));
-				ary.set(right, tmp);
-				left++;
-				right--;
+				tmp = ary.get(idxL);
+				ary.set(idxL, ary.get(pivotIdx));
+				ary.set(pivotIdx, tmp);
 			}
+			idxL++;
 		}
 		
-		if(left < pivotIdx) {
-			quickSortAry(ary, leftIdx, pivotIdx - 1);
-		}
-		if(right > pivotIdx) {
-			quickSortAry(ary, pivotIdx + 1, rightIdx);
-		}
+		ary.set(left, ary.get(pivotIdx));
+		ary.set(pivotIdx, pivot);
+		
+		return pivotIdx;
 	}
 }
