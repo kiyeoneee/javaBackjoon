@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class BJ10451 {
 	static class Edge {
-		boolean isVisited;
-		int connectedEdge;
+		private boolean isVisited;
+		private int connectedEdge;
 		
 		Edge() {
 			isVisited = false;
